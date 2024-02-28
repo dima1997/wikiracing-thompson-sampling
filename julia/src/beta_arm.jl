@@ -13,13 +13,11 @@ function pull(arm::BetaArm)
     rand(Beta(arm.α, arm.β))
 end
 
-# function update(arm::NormalInverseGammaArm, observation::Real)
-#     arm.µ0 = (arm.v * arm.µ0 + observation) / (arm.v + 1)
-#     arm.v += 1
-#     arm.α += 1 / 2
-#     arm.β += (arm.v / (arm.v + 1)) * (((observation - arm.µ0) ^ 2) / 2)
-#     arm
-# end
+function update(arm::BetaArm, observation::Real)
+    arm.α += observation 
+    arm.β += (1 - observation) 
+    arm
+end
 
 # function mean(arm::NormalInverseGammaArm)
 #     arm.μ0
