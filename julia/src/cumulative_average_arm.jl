@@ -10,7 +10,7 @@ function CumulativeAverageArm_init()
 end
 
 function pull(arm::CumulativeAverageArm)
-    arm.μ
+    mean(arm)
 end
 
 function update(arm::CumulativeAverageArm, observation::Real)
