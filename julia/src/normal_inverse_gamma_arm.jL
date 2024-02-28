@@ -22,3 +22,7 @@ function update(arm::NormalInverseGammaArm, observation::Real)
     arm.β += (arm.v / (arm.v + 1)) * (((observation - arm.µ0) ^ 2) / 2)
     arm
 end
+
+function mean(arm::NormalInverseGammaArm)
+    arm.μ0
+end
