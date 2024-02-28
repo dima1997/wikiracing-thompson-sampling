@@ -1,4 +1,5 @@
 using ConjugatePriors: NormalInverseGamma
+import Statistics.mean
 
 mutable struct NormalInverseGammaArm
     μ0::Real

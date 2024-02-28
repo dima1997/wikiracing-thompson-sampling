@@ -1,3 +1,5 @@
+import Statistics.mean
+
 mutable struct UpperConfidenceBoundArm
     """
     https://fr.wikipedia.org/wiki/Algorithme_UCB

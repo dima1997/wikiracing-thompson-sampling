@@ -17,5 +17,4 @@ include("../src/beta_arm.jl")
     update(arm, observed_reward)
     posterior_reward = pull(arm)
     @test posterior_reward == 0.04885762249758161
-
 end;

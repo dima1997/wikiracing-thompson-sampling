@@ -17,5 +17,7 @@ include("../src/cumulative_average_arm.jl")
     update(arm, observed_reward_2)
     posterior_reward_ = pull(arm)
     @test posterior_reward_ == 0.625
+
+    @test mean(arm) == 0.625
 end;
 

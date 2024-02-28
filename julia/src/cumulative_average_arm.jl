@@ -1,3 +1,5 @@
+import Statistics.mean
+
 mutable struct CumulativeAverageArm
     μ::Real
     N::Real
@@ -15,4 +17,8 @@ function update(arm::CumulativeAverageArm, observation::Real)
     arm.μ = (arm.N * arm.μ + observation) / (arm.N + 1)
     arm.N += 1
     arm
+end
+
+function mean(arm::CumulativeAverageArm)
+    arm.μ
 end
