@@ -15,7 +15,8 @@ include("../src/normal_inverse_gamma_arm.jl")
 
     observed_reward = 0.9
     update(arm, observed_reward)
-    @test pull(arm) == -1.0719292095550224
+    posterior_reward = pull(arm)
+    @test posterior_reward == -1.0719292095550224
 
     @test mean(arm) == 0.45
 end;
