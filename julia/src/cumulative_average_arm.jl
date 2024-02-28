@@ -1,5 +1,3 @@
-using Distributions: Normal
-
 mutable struct CumulativeAverageArm
     μ::Real
     N::Real
