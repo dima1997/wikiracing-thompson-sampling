@@ -1,7 +1,7 @@
 using Test
 using Random
 
-include("../src/beta_arm.jl")
+include("../../src/arms/beta_arm.jl")
 
 @testset "BetaArm Tests" begin
     Random.seed!(42)

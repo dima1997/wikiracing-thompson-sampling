@@ -1,0 +1,5 @@
+include("./test_beta_arm.jl")
+include("./test_cumulative_average_arm.jl")
+include("./test_normal_arm.jl")
+include("./test_normal_inverse_gamma_arm.jl")
+include("./test_upper_confidence_bound_arm.jl")

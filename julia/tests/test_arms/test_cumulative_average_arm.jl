@@ -1,11 +1,10 @@
 using Test
 using Random
 
-include("../src/upper_confidence_bound_arm.jl")
+include("../../src/arms/cumulative_average_arm.jl")
 
-@testset "UpperConfidenceBoundArm Tests" begin
-    confidence = 2
-    arm = UpperConfidenceBoundArm_init(confidence)
+@testset "CumulativeAverageArm Tests" begin
+    arm  = CumulativeAverageArm_init()
     prior_reward = pull(arm)
     @test prior_reward == 0.0
 
@@ -16,8 +15,9 @@ include("../src/upper_confidence_bound_arm.jl")
     
     observed_reward_2 = 0.75
     update(arm, observed_reward_2)
-    posterior_reward_2 = pull(arm)
-    @test posterior_reward_2 == 1.8024100225154747
+    posterior_reward_ = pull(arm)
+    @test posterior_reward_ == 0.625
 
     @test mean(arm) == 0.625
 end;
+

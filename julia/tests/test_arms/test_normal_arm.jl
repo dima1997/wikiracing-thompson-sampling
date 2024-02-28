@@ -1,7 +1,7 @@
 using Test
 using Random
 
-include("../src/normal_arm.jl")
+include("../../src/arms/normal_arm.jl")
 
 @testset "NormalArm Tests" begin
     Random.seed!(42)

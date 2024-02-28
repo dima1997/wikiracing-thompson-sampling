@@ -1,7 +1,7 @@
 using Test
 using Random
 
-include("../src/normal_inverse_gamma_arm.jl")
+include("../../src/arms/normal_inverse_gamma_arm.jl")
 
 @testset "NormalInverseGammaArm Tests" begin
     Random.seed!(42)
