@@ -10,5 +10,7 @@ include("../src/normal_arm.jl")
     arm  = NormalArm_init(μ, σ2)
     prior_reward = pull(arm) 
     @test prior_reward == 0.7883556016042917
+
+    @test mean(arm) == 0.0
 end;
 

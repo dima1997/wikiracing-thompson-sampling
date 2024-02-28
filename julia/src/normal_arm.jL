@@ -13,3 +13,7 @@ function pull(arm::NormalArm)
     rand(Normal(arm.μ, sqrt(arm.σ2)))[1]
 end
 
+function mean(arm::NormalArm)
+    arm.μ
+end
+
