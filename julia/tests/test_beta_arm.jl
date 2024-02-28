@@ -11,10 +11,11 @@ include("../src/beta_arm.jl")
     prior_reward = pull(arm) 
     @test prior_reward == 0.8023279156644033
 
+    @test mean(arm) == 0.5
+
     observed_reward = 0.1
     update(arm, observed_reward)
     posterior_reward = pull(arm)
     @test posterior_reward == 0.04885762249758161
 
-    # @test mean(arm) == 0.45
 end;

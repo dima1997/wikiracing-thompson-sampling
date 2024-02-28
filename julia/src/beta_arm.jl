@@ -1,4 +1,5 @@
 using Distributions: Beta
+import Statistics.mean
 
 mutable struct BetaArm
     α::Real
@@ -19,6 +20,6 @@ function update(arm::BetaArm, observation::Real)
     arm
 end
 
-# function mean(arm::NormalInverseGammaArm)
-#     arm.μ0
-# end
+function mean(arm::BetaArm)
+    mean(Beta(arm.α, arm.β))
+end
