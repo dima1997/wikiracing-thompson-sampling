@@ -18,4 +18,6 @@ include("../src/upper_confidence_bound_arm.jl")
     update(arm, observed_reward_2)
     posterior_reward_2 = pull(arm)
     @test posterior_reward_2 == 1.8024100225154747
+
+    @test mean(arm) == 0.625
 end;

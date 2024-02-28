@@ -24,3 +24,7 @@ function update(arm::UpperConfidenceBoundArm, observation::Real)
     arm.N += 1
     arm
 end
+
+function mean(arm::UpperConfidenceBoundArm)
+    arm.μ
+end
