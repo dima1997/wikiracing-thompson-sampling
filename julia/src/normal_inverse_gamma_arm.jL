@@ -14,3 +14,11 @@ end
 function pull(arm::NormalInverseGammaArm)
     rand(NormalInverseGamma(arm.μ0, arm.v, arm.α, arm.β))[1]
 end
+
+function update(arm::NormalInverseGammaArm, observation::Real)
+    arm.µ0 = (arm.v * arm.µ0 + observation) / (arm.v + 1)
+    arm.v += 1
+    arm.α += 1 / 2
+    arm.β += (arm.v / (arm.v + 1)) * (((observation - arm.µ0) ^ 2) / 2)
+    arm
+end
