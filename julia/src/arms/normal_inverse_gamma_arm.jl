@@ -1,7 +1,8 @@
 using ConjugatePriors: NormalInverseGamma
 import Statistics.mean
+include("./abstract_arm.jl")
 
-mutable struct NormalInverseGammaArm
+mutable struct NormalInverseGammaArm <: AbstractArm
     μ0::Real
     v::Real
     α::Real

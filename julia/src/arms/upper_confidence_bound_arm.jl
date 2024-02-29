@@ -1,6 +1,7 @@
 import Statistics.mean
+include("./abstract_arm.jl")
 
-mutable struct UpperConfidenceBoundArm
+mutable struct UpperConfidenceBoundArm <: AbstractArm
     """
     https://fr.wikipedia.org/wiki/Algorithme_UCB
     """

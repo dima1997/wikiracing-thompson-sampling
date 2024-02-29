@@ -1,6 +1,7 @@
 import Statistics.mean
+include("./abstract_arm.jl")
 
-mutable struct CumulativeAverageArm
+mutable struct CumulativeAverageArm <: AbstractArm
     μ::Real
     N::Real
 end

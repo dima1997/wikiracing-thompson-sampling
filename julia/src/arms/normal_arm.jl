@@ -1,6 +1,7 @@
 using Distributions: Normal
+include("./abstract_arm.jl")
 
-mutable struct NormalArm
+mutable struct NormalArm <: AbstractArm
     μ::Real 
     σ2::Real
 end
