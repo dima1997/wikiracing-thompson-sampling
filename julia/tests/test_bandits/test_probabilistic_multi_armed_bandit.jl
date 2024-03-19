@@ -1,62 +1,30 @@
 using Test
 using Random
+using SimpleMock
 
 include("../../src/bandits/prob_multi_armed_bandit.jl")
 include("../../src/arms/abstract_arm.jl")
-
+include("../../src/arms/beta_arm.jl")
+include("../../src/arms/cumulative_average_arm.jl")
+include("../../src/arms/normal_inverse_gamma_arm.jl")
 
 
 @testset "ProbMultiArmedBandit" begin
     Random.seed!(42)
-    struct CteArm 
-        μ::Real
-    end 
-
-    function CteArm_init(μ::Real)
-        CteArm(μ)
-    end
-
-    function pull(arm::CteArm)
-        arm.μ
-    end
-
-    function update(arm::CteArm, observation::Real)
-        arm
-    end
-
-    function mean(arm::CteArm)
-        arm.μ
-    end
-    @testset "Pull lowest" begin
-        pulls = [0, 0, 0]
-        mutable struct TestArm <: AbstractArm
-            i::Int64
-            pulls::Vector{Int64}
-        end 
-    
-        function TestArm_init(i::Int64, pulls::Vector{Int64})
-            TestArm(i, pulls)
+    @testset "Pull All" begin
+        name       = ""
+        real_arms  = Vector{AbstractArm}([])   
+        est_arms   = [BetaArm_init(1,1), CumulativeAverageArm_init(), NormalInverseGammaArm_init(0, 1, 1, 1)]
+        bandit     = ProbMultiArmedBandit_init(name, est_arms, real_arms)
+        mock_pull  = Mock(pull)
+        mock(pull) do mock_pull
+            pull_arm(bandit)
+            calls_list = calls(mock_pull)
+            @test length(calls_list) == length(est_arms)
+            @test calls_list[1].args[1] == est_arms[1]
+            @test calls_list[2].args[1] == est_arms[2]
+            @test calls_list[3].args[1] == est_arms[3]
         end
-    
-        function pull(arm::TestArm)
-            arm.pulls[arm.i] = 1
-        end
-    
-        function update(arm::TestArm, observation::Real) 
-            arm
-        end
-    
-        function mean(arm::TestArm)
-            0
-        end
-
-        name      = ""
-        real_arms = Vector{AbstractArm}([])   
-        est_arms  = [TestArm_init(1,pulls), TestArm_init(2, pulls), TestArm_init(3, pulls)]
-        bandit    = ProbMultiArmedBandit_init(name, est_arms, real_arms)
-        pull_arm(bandit)
-
-        @test sum(pulls) == 3
     end; 
 end;
 
