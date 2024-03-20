@@ -15,9 +15,9 @@ end
 
 function pull_arm(bandit::ProbMultArmedBandit)
     est_rewards  = [pull(arm) for arm in bandit.est_arms]
-    println(est_rewards)
     best_arm_idx = argmin(est_rewards)
-    pull(bandit.real_arms[best_arm_idx]) 
+    real_reward  = pull(bandit.real_arms[best_arm_idx]) 
+    update(bandit.est_arms[best_arm_idx], real_reward)
     bandit
 end
 
