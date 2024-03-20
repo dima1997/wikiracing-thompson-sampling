@@ -53,10 +53,11 @@ end
         @test est_arms[1].n_updates == 0
         @test est_arms[2].n_updates == 1
         @test est_arms[3].n_updates == 0
-
         @test est_arms[1].last_observation === -1
         @test est_arms[2].last_observation == real_arms[2].reward
         @test est_arms[3].last_observation === -1
+        # Keep track of observations
+        @test bandit.real_rewards[end] == real_arms[2].reward
     end
 end
 
