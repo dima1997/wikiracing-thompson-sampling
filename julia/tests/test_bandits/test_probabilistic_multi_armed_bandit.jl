@@ -15,10 +15,11 @@ mutable struct TestArm <: AbstractArm
     n_pulls::Int64
     last_observation::Real
     n_updates::Int64
+    n_means::Int64
 end 
 
 function TestArm_init(id::String, reward::Real)
-    TestArm(id, reward, 0, -1, 0)
+    TestArm(id, reward, 0, -1, 0, 0)
 end
 
 function pull(arm::TestArm)
@@ -32,12 +33,17 @@ function update(arm::TestArm, observation::Real)
     arm
 end
 
+function mean(arm::TestArm)
+    arm.n_means += 1
+    arm.reward
+end
+
 @testset "ProbMultiArmedBandit" begin
     Random.seed!(42) 
     @testset "Pull Arm" begin
         name       = ""
-        real_arms  = [TestArm_init("RA", 1), TestArm_init("RB", 1), TestArm_init("RC", 1)]
-        est_arms   = [TestArm_init("EA", 2), TestArm_init("EB", 1), TestArm_init("EC", 3)]
+        real_arms  = [TestArm_init("RA", 1), TestArm_init("RB", 2), TestArm_init("RC", 3)]
+        est_arms   = [TestArm_init("EA", 5), TestArm_init("EB", 4), TestArm_init("EC", 6)]
         bandit     = ProbMultiArmedBandit_init(name, est_arms, real_arms)
         pull_arm(bandit)
         # Pull all estimated arms
@@ -58,6 +64,8 @@ end
         @test est_arms[3].last_observation === -1
         # Keep track of observations
         @test bandit.real_rewards[end] == real_arms[2].reward
+        # Keep track of regret
+        @test bandit.regrets[end] == est_arms[2].reward - real_arms[1].reward
     end
 end
 
