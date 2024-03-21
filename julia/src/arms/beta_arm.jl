@@ -1,5 +1,6 @@
 using Distributions: Beta
 import Statistics.mean
+
 include("./abstract_arm.jl")
 
 mutable struct BetaArm <: AbstractArm

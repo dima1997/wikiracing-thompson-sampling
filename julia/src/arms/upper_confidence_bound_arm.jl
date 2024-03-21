@@ -1,10 +1,10 @@
 import Statistics.mean
 include("./abstract_arm.jl")
 
+"""
+https://fr.wikipedia.org/wiki/Algorithme_UCB
+"""
 mutable struct UpperConfidenceBoundArm <: AbstractArm
-    """
-    https://fr.wikipedia.org/wiki/Algorithme_UCB
-    """
     confidence::Real    # Confidence
     μ::Real             # Mean
     N::Real             # Number of pulls
